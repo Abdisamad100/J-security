@@ -1,0 +1,140 @@
+{% extends 'juba/adminbase.html' %}
+
+
+
+{% block content %}
+
+<head>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 5px;
+    }
+
+      .promo{
+  animation: promo 4s linear infinite;
+}
+@keyframes promo{
+0%{opacity: 0;}
+50%{opacity: .5;}
+100%{opacity: 1;}
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.search {
+width: 100%;
+position: relative;
+display: flex;
+}
+
+.searchTerm {
+width: 100%;
+border: 3px solid #00B4CC;
+border-right: none;
+padding: 5px;
+
+border-radius: 5px 0 0 5px;
+outline: none;
+color: #9DBFAF;
+}
+
+.searchTerm:focus{
+color: #00B4CC;
+}
+
+.searchButton {
+
+border: 1px solid #00B4CC;
+background: #00B4CC;
+
+color: #fff;
+border-radius: 0 5px 5px 0;
+cursor: pointer;
+
+}
+
+</style>
+</head>
+
+
+<br><br>
+
+<div class="container">
+  <form method="get" action="/searchcid">
+    {% csrf_token %}
+  <div class="wrap">
+     <div class="search">
+        <input type="text" class="searchTerm" name="query" placeholder="Search CID By ID">
+        <input type="submit" value="Search" class="searchButton">
+          
+       </input>
+     </div>
+  </div>
+  </form>
+  <div class="row">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">CID</h6>
+
+      </div>
+
+      <table class="table table-hover" id="dev-table">
+        <thead>
+
+          <tr>
+            <th>Name</th>
+            <th>Unique ID</th>
+            <th>Mother Name</th>
+            <th>District</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Salary</th>
+            <th>Update</th>
+                    <th>Delete</th>
+         
+          </tr>
+        </thead>
+        {% for s in cids %}
+        <tr>
+          <td> {{s.get_name}}</td>
+          <td> {{s.unique_id}}</td>
+          <td>{{s.mother_name}}</td>
+          <td> {{s.district}}</td>
+          <td>{{s.gender}}</td>
+          <td>{{s.mobile}}</td>
+          <td>{{s.salary}}</td>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'update-cid' s.id  %}"  ><span class="glyphicon glyphicon-edit"></span></a></td>
+          <td><a class="btn btn-danger btn-xs" href="{% url 'delete-cid' s.id  %}"  ><span class="glyphicon glyphicon-trash"></span></a></td>
+
+        
+        
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,108 @@
+{% extends 'juba/cidbase.html' %}
+
+
+
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    button:hover,
+    a:hover {
+      opacity: 0.7;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+
+
+    }
+
+    .grid-container {
+
+   
+    justify-content: center;
+}
+
+    a:link {
+      text-decoration: none;
+    }
+
+    a {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="grid-container" style="align-items: center;">
+    <div class="grid-item">
+        <hr>
+      <h1 style="text-align: center;color: blue;">Crime Reported By Both CID & OB</h1>
+      <hr><br><br>
+        {% for s in reports %}
+      <div class="card">
+        <img src="{% static s.criminal_pic.url %}"  style="width:100%">
+        <p class="title">Criminal Name : {{s.criminal_name}}</p>
+        <p>Unique ID: {{s.unique_id}}</p>
+        <p>Crime : {{s.crime}}</p>
+        <p>Crime Date : {{s.crime_date}}</p>
+        <p>Gender : {{s.gender}}</p>
+        <p>Height : {{s.height}}</p>
+        <p>Weight : {{s.weight}}</p>
+        <p>Hair Color : {{s.hair_color}}</p>
+        <p>Reported Name : {{s.reporter_name}}</p>
+      
+
+
+
+       <br>
+      </div><br><br>
+      {% endfor %}
+
+    </div>
+
+  
+  </div>
+  
+  <br><br><br>
+</body>
+
+</html>
+
+{% endblock content %}
